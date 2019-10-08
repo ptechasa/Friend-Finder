@@ -2,13 +2,13 @@ INSERT INTO questions (question) VALUES
 ('1. I am the life of the party'), 
 ('2. I am always prepared'), 
 ('3. I get stressed out easily'), 
-('4. I have little to say.'), 
+('4. I have little to say'), 
 ('5. I am relaxed most of the time'), 
 ('6. I feel comfortable around people'), 
 ('7. I get upset easily'), 
 ('8. I make a mess of things'), 
 ('9. I am quick to understand things'), 
-('10. I am a happy person');
+('10. I am happy everyday');
 
 INSERT INTO friends (name, picture_link) VALUES 
 ('Brit Marling', 'https://gfp-2a3tnpzj.stackpathdns.com/wp-content/uploads/2018/11/Forever-Puppy-600x600.jpg'),

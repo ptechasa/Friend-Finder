@@ -1,12 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Survey</title>
+    <!-- Font Awesome using CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Bootstrap Readable Theme-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- jQuery core-->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 </head>
+
 <body>
-    
+    <div class='jumbotron text-align'>
+        <h3>Survey Questions</h3>
+        <hr>
+
+        <h4><strong>About You</strong></h4>
+
+        <form action="/api/friends" method="POST">
+            <h5>Name<span style='color: red'> *</span></h5>
+            <input type="text" id="name" class="form-control" required>
+
+            <h5>Link to Photo Image<sapn style='color: red'> *</sapn>
+            </h5>
+            <input type="text" id="link-photo" class="form-control" required>
+            <hr>
+
+            <!-- 
+<select id='opt' class='form-control' input-lg>
+    <option value=''>Select choice</option>
+</select> -->
+
+
+            <p>1. I am the life of the party</p>
+            <select class='choice' id='q1'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>2. I am always prepared</p>
+            <select class='choice' id='q2'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>3. I get stressed out easily</p>
+            <select class='choice' id='q3'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>4. I have little to say</p>
+            <select class='choice' id='q4'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>5. I am relaxed most of the time</p>
+            <select class='choice' id='q5'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>6. I feel comfortable around people</p>
+            <select class='choice' id='q6'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>7. I gget upset easily</p>
+            <select class='choice' id='q7'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>8. I make a mess of things</p>
+            <select class='choice' id='q8'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>9. I gam quick to understand things</p>
+            <select class='choice' id='q9'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+            <p>10. I am happy everyday</p>
+            <select class='choice' id='q10'>
+                <option value="1">1 (Strongly Disagree)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Strongly Agree)</option>
+            </select>
+
+    </div>
+
+    <!-- Submit Button -->
+    <button type='submit' class='btn btn-primary btn-lg btn-block' id='submit'>Submit
+        <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.btn').on('click', function () {
+                var value1 = $('#opt1').val()
+                var value2 = $('#opt2').val()
+                var value3 = $('#opt3').val()
+                var value4 = $('#opt4').val()
+                var value5 = $('#opt5').val()
+                var value6 = $('#opt6').val()
+                var value7 = $('#opt7').val()
+                var value8 = $('#opt8').val()
+                var value9 = $('#opt9').val()
+                var value10 = $('#opt10').val()
+                // console.log(value1, value2)
+
+                $.post('api/survey', {
+                    answer1: value1,
+                    answer2: value2,
+                    answer3: value3,
+                    answer4: value4,
+                    answer5: value5,
+                    answer6: value6,
+                    answer7: value7,
+                    answer8: value8,
+                    answer9: value9,
+                    answer10: value10
+                }, function (result) {
+                    console.log(result)
+                })
+
+            })
+
+        })
+
+    </script>
+
+
 </body>
+
 </html>
