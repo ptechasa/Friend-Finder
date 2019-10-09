@@ -10,12 +10,8 @@ require('dotenv').config()
 //automatically make a route for every single file in public folder
 app.use(express.static("public"));
 
-//integrate body-parser with express
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
+// Sets up the Express app to handle data parsing
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 //mysql package
@@ -32,7 +28,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 //GET method route
-app.use(function (req, res) {
+app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, "/public/home.html"))
 });
 
@@ -40,9 +36,17 @@ app.get('/survey', function (req, res) {
   res.sendFile(path.join(__dirname, "/public/survey.html"))
 });
 
+app.get('/api/questions', function (req, res) {
+  // console.log(req)
+  connection.query('SELECT * FROM questions', function (err, response) {
+    if (err) throw err
+    console.log(response)
+    res.send(response)
+
+  })
+})
+
+/
 app.listen(3000, function () {
   console.log('listening on 3000');
 });
-
-// var port = process.env.PORT || 3000;
-// app.listen(port, () => console.log('Listening on port ${port}...'));
