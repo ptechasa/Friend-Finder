@@ -23,7 +23,7 @@
     <div class='container'>
         <h4><strong>About You</strong></h4>
 
-        <form action="/api/friends" method="POST">
+        <form action="/api/questions" method="POST">
             <h5>Name<span style='color: red'> *</span></h5>
             <input type="text" id="name" class="form-control" required>
 
@@ -52,7 +52,7 @@
             console.log('hello')
             console.log(data)
 
-            //Grab the questions from database and add into <div>
+            //Grab the questions from database and add it into <div>
             for (var i = 0; i < data.length; i++) {
                 var divTag = $('<div>')
                 var question = data[i].question
@@ -63,13 +63,14 @@
                 //Generate option level 1-5
                 var select = $('<select>')
 
-                // I'll add unique id for each questions or class
-
-
                 for (var x = 0; x < 5; x++) {
-
                     var option = $('<option>')
                     option.attr('value', x + 1)
+
+                    //add class and unique id for each question
+                    select.attr('class', 'form-control')
+                    select.attr('id', 'question' + i + x)
+
                     if (x + 1 === 1) {
                         option.text('1 (strongly agree)')
                     } else if (x + 1 === 5) {
@@ -77,7 +78,6 @@
                     } else {
                         option.text(x + 1)
                     }
-
                     select.append(option)
                     divTag.append(select)
                 };
@@ -85,7 +85,7 @@
                 $('.question-container').append(divTag)
             }
         })
-       
+
         // Form validation
         function validateForm() {
             var isValid = true;
@@ -106,7 +106,7 @@
 
         $(document).ready(function () {
             $('.btn').on('click', function () {
-                if (validateForm()) {g
+                if (validateForm()) {
 
                     // Create an object for the user data
                     var userData = {
