@@ -30,9 +30,9 @@ var connection = mysql.createConnection(process.env.JAWSDB_URL ||
 connection.connect();
 
 //Use GET method route to main page
-// app.get('/', function (req, res) {
-//   res.sendFile(path.join(__dirname, "/public/home.html"))
-// });
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, "/public/home.html"))
+});
 
 // Use GET method route to survey page
 // app.get('/survey', function (req, res) {
