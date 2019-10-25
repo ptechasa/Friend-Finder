@@ -75,6 +75,6 @@ app.post('/api/insert', function (req, res) {
 	});
 });
 
-app.listen(3000, function () {
+app.listen(port, function () {
   console.log('listening on 3000');
 });
