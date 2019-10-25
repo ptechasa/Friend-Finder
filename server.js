@@ -18,7 +18,8 @@ app.use(bodyParser.json())
 var mysql = require('mysql');
 
 //Establishing connections
-var connection = mysql.createConnection({
+var connection = mysql.createConnection(process.env.JAWSDB_URL ||
+  {
   host: process.env.host,
   user: process.env.user,
   password: process.env.password,
@@ -28,25 +29,15 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-// connection.connect(function(err) {
-//   console.log(err.code); // 'ECONNREFUSED'
-//   console.log(err.fatal); // true
-// });
-
-// connection.query('SELECT 1', function (error, results, fields) {
-//   console.log(error.code); // 'ECONNREFUSED'
-//   console.log(error.fatal); // true
-// });
-
 //Use GET method route to main page
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, "/public/home.html"))
 });
 
-//Use GET method route to survey page
-app.get('/survey', function (req, res) {
-  res.sendFile(path.join(__dirname, "/public/survey.html"))
-});
+// Use GET method route to survey page
+// app.get('/survey', function (req, res) {
+//   res.sendFile(path.join(__dirname, "/public/survey.html"))
+// });
 
 app.get('/api/questions', function (req, res) {
   // console.log(req)
@@ -58,6 +49,31 @@ app.get('/api/questions', function (req, res) {
   })
 })
 
+app.get('/api/friends', function (req, res) {
+  // console.log(req)
+  connection.query('SELECT * FROM friends', function (err, response) {
+    if (err) throw err
+    console.log(response)
+    res.send(response)
+
+  })
+})
+
+app.post('/api/insert', function (req, res) {
+	connection.query('INSERT into friends (name, picture_link) VALUES (?, ?)', [req.body.first_name1, req.body.picture1], function (error, results, fields) {
+		if (error) res.send(error)
+		else {
+			//results.insertId
+			var jsonBody = JSON.parse(req.body.answer);
+			for (var i = 0; i < 10; i++) {
+				connection.query('INSERT into scores (question_id, friend_id, score) VALUES (?, ?, ?)', [i + 1, results.insertId, jsonBody[i]], function (error, results, fields) {
+					if (error) { console.log(error) }
+				});
+			}
+			res.send('/friend.html?id=' + results.insertId)
+		}
+	});
+});
 
 app.listen(3000, function () {
   console.log('listening on 3000');

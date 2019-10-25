@@ -9,6 +9,13 @@
     <!-- Font Awesome using CSS -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- Link to reset stylesheet -->
+    <link rel="stylesheet" href="css/reset.css">
+
+    <!-- Compiled and minified Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
     <!-- Bootstrap Readable Theme-->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -43,6 +50,52 @@
     <button type='submit' class='btn btn-primary' id='submit'>Submit
         <i class="fa fa-check-circle-o" aria-hidden="true"></i></button>
 
+    <footer class="footer blue-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Friend Finder App</h5>
+                    <p class="grey-text text-lighten-4">Thank you for taking the brief of this survey.</p>
+                </div>
+
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="/api/friends">API Friends List</a></li>
+                        <li><a class="grey-text text-lighten-3" href="https://github.com/ptechasa/friend-finder">GitHub
+                                Repo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2019
+                <a class="grey-text text-lighten-4 right" href="https://github.com/ptechasa">Reference Work</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="resultModal modal fade" role=dialog>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title"><strong>Best Match</strong></h2>
+                </div>
+
+                <div class="modal-body">
+                    <h2 class="matchName"></h2>
+                    <img class="matchImg" src="https://via.placeholder.com/150" alt="Placeholder Image">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript">
@@ -68,7 +121,7 @@
                     option.attr('value', x + 1)
 
                     //add class and unique id for each question
-                    select.attr('class', 'form-control')
+                    select.attr('class', 'browser-default form-control')
                     select.attr('id', 'question' + i + x)
 
                     if (x + 1 === 1) {
@@ -126,6 +179,16 @@
                         ]
                     };
                     console.log(userData)
+
+                    //Connect to Database in friends Table
+                    $.post('/api/friends', userData, function (data) {
+                        console.log('friends')
+                        console.log(data)
+
+
+                    })
+                } else {
+                    alert('Please fill out all friends before submitting')
                 }
 
             })
